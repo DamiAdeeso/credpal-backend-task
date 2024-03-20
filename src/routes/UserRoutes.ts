@@ -10,7 +10,7 @@ userRouter.get('/login',login);
 
 userRouter.put('/update/:id',isAuth,updateUser);
 
-userRouter.delete('/delete',isAuth,deleteUser)
+userRouter.delete('/delete/:id',isAuth,deleteUser)
 
 
 

@@ -64,11 +64,12 @@ export const updateUser = expressAsyncHandler(async (req: Request, res: Response
     console.log(foundStaff);
     try {
       if (foundStaff) {
-        (foundStaff.name = req.body.name),
-          (foundStaff.email = req.body.email),
-          (foundStaff.department = req.body.phoneNumber),
-          (foundStaff.userName = req.body.address),
-          (foundStaff.managerName = req.body.address);
+        foundStaff.name = req.body.name ? req.body.name : foundStaff.name;
+        foundStaff.email = req.body.email ? req.body.email : foundStaff.email;
+        foundStaff.department = req.body.department ? req.body.department : foundStaff.department;
+        foundStaff.userName = req.body.userName ? req.body.userName : foundStaff.userName;
+        foundStaff.managerName =req.body.managerName?req.body.managerName:foundStaff.managerName;
+        
           console.log(foundStaff);
         await foundStaff.save();
         console.log("debug2");
