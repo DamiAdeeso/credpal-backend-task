@@ -69,7 +69,7 @@ export const updateUser = expressAsyncHandler(async (req: Request, res: Response
           (foundStaff.department = req.body.phoneNumber),
           (foundStaff.userName = req.body.address),
           (foundStaff.managerName = req.body.address);
-  
+          console.log(foundStaff);
         await foundStaff.save();
         console.log("debug2");
         res.status(201).send({
@@ -90,6 +90,22 @@ export const updateUser = expressAsyncHandler(async (req: Request, res: Response
 
 
 export const deleteUser = expressAsyncHandler(async(req:Request,res:Response):Promise<void>=>{
-   
+  try {
+    const deletedStaff = await Staff.findByIdAndDelete(req.params.id);
+    if (deletedStaff) {
+        res.status(200).send({
+            message: "Staff deleted successfully",
+        });
+    } else {
+        res.status(404).send({
+            message: "Staff not found",
+        });
+    }
+} catch (err) {
+    console.error(err);
+    res.status(500).send({
+        message: "Internal server error",
+    });
+}
 });
 
